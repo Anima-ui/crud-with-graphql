@@ -7,8 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BookInput {
-    private String title;
-    private Long authorId;
-    private Integer pageCount;
+public class AuthorInput {
+    private String name;
 }

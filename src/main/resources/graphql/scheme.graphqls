@@ -1,6 +1,6 @@
 type Query {
     books: [Book!]!
-    bookById(id: ID): Book
+    bookById(id: ID!): Book!
     authors: [Author!]!
 }
 
@@ -15,11 +15,17 @@ input BookUpdateInput {
     newTitle: String!
 }
 
+input AuthorInput {
+    name: String!
+}
+
 type Mutation {
     addBook(input: BookInput!): Book!
     updateBook(input: BookUpdateInput!): Book!
     deleteBook(id: ID!): Boolean!
+    addAuthor(input: AuthorInput!): Author!
 }
+
 
 type Book {
     id: ID!
