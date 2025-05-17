@@ -13,6 +13,7 @@ import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -61,5 +62,10 @@ public class BookController {
     @MutationMapping
     public Author addAuthor(@Argument("input") AuthorInput authorInput) {
         return authorService.addAuthor(authorInput);
+    }
+
+    @QueryMapping
+    public LocalDateTime time() {
+        return LocalDateTime.now();
     }
 }

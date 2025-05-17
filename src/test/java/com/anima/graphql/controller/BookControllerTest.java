@@ -17,6 +17,9 @@ import org.springframework.test.web.servlet.client.MockMvcWebTestClient;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureGraphQlTester
 class BookControllerTest {
@@ -73,5 +76,23 @@ class BookControllerTest {
 
         Assertions.assertEquals("John", author.getName());
         Assertions.assertNotNull(author.getId());
+    }
+
+    @Test
+    void timeQueryReturnsValidLocalDateTime() {
+        graphQlTester
+                .documentName("time")
+                .execute()
+                .path("time")
+                .entity(String.class)
+                .satisfies(timeStr -> {
+                    LocalDateTime localDateTimeParsed = LocalDateTime.parse(timeStr);
+                    LocalDateTime now = LocalDateTime.now();
+
+                    Assertions.assertNotNull(localDateTimeParsed);
+                    Duration diff = Duration.between(localDateTimeParsed, now).abs();
+                    Assertions.assertTrue(diff.getSeconds() < 2,
+                            "Time difference too large: " + diff.getSeconds() + " seconds");
+                });
     }
 }

@@ -1,7 +1,10 @@
+scalar LocalDateTime
+
 type Query {
     books: [Book!]!
     bookById(id: ID!): Book!
     authors: [Author!]!
+    time: LocalDateTime!
 }
 
 input BookInput {
