@@ -26,7 +26,6 @@ type Mutation {
     addAuthor(input: AuthorInput!): Author!
 }
 
-
 type Book {
     id: ID!
     title: String!

@@ -1,0 +1,18 @@
+query books {
+    books {
+        id
+        title
+        pageCount
+        author {
+            id
+            name
+        }
+    }
+}
+
+mutation addAuthor {
+    addAuthor(input: {name: "John"}) {
+        id
+        name
+    }
+}
